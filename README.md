@@ -34,3 +34,29 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Code Quality: Prettier, ESLint, and Husky
+
+This project uses Prettier, ESLint, and Husky for code quality and consistency.
+
+- **Prettier**: Run `pnpm format` to auto-format code, or `pnpm format:check` to check formatting.
+- **ESLint**: Run `pnpm lint` to check for lint errors.
+- **Husky**: Git hooks are managed with Husky. Hooks are created manually in the `.husky/` directory (not with deprecated `husky add`).
+
+### Setting up Husky (non-deprecated way)
+
+After cloning or installing dependencies, run:
+
+```sh
+pnpm install
+```
+
+This will automatically run `husky install` via the `prepare` script.
+
+To add or update hooks, manually edit files in `.husky/` (e.g., `.husky/pre-commit`, `.husky/pre-push`). Make sure they are executable:
+
+```sh
+chmod +x .husky/pre-commit .husky/pre-push
+```
+
+**Do not use `husky add` or other deprecated commands.**
