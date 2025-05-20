@@ -1,0 +1,34 @@
+query GetTopStarredRepositories($first: Int!, $after: String) {
+  search(
+    type: REPOSITORY
+    query: "is:public stars:>10000 topic:react"
+    first: $first
+    after: $after
+  ) {
+    repositoryCount
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        ... on Repository {
+          id
+          name
+          description
+          stargazerCount
+          forkCount
+          url
+          owner {
+            login
+            avatarUrl
+          }
+          primaryLanguage {
+            name
+            color
+          }
+        }
+      }
+    }
+  }
+}
