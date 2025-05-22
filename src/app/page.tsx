@@ -1,10 +1,10 @@
 'use client';
 
-import { Layout } from 'antd';
+import { Layout, Typography } from 'antd';
 import { RepositoriesTable } from '@/features/repositories/components/RepositoriesTable';
 import { RepositoriesErrorAlert } from '@/features/repositories/components/RepositoriesErrorAlert';
 import { useRepositories } from '@/features/repositories/hooks/useRepositories';
-import Title from 'antd/es/typography/Title';
+const { Title } = Typography;
 
 const { Content } = Layout;
 

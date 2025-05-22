@@ -1,11 +1,11 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-const httpLink = createHttpLink({
+export const httpLink = createHttpLink({
   uri: 'https://api.github.com/graphql',
 });
 
-const authLink = setContext((_, { headers }) => {
+export const authLink = setContext((_, { headers }) => {
   const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
   if (!token) {
