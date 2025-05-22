@@ -1,33 +1,41 @@
-import { render } from '@testing-library/react';
-import Page from '../page';
-import { ApolloProvider } from '@apollo/client';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { render, screen, waitFor } from '@testing-library/react';
+import Home from '../page';
+import { MockedProvider } from '@apollo/client/testing';
+import { GetTopStarredRepositoriesDocument } from '@/graphql/generated';
+import { mockGraphQLRepositories } from '@/features/repositories/components/__tests__/mocks';
+import { DEFAULT_QUERY } from '@/constants';
 
-jest.mock('../../features/repositories/components/RepositoriesTable', () => ({
-  RepositoriesTable: () => <div data-testid="repositories-table">Repositories Table</div>,
-}));
-
-const mockClient = new ApolloClient({
-  cache: new InMemoryCache(),
-  defaultOptions: {
-    watchQuery: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'ignore',
+describe('Home', () => {
+  const mocks = [
+    {
+      request: {
+        query: GetTopStarredRepositoriesDocument,
+        variables: {
+          first: 10,
+          after: 'Y3Vyc29yOjA=',
+          query: DEFAULT_QUERY,
+        },
+      },
+      result: {
+        data: mockGraphQLRepositories,
+      },
     },
-    query: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'all',
-    },
-  },
-});
+  ];
 
-describe('Page', () => {
-  it('renders RepositoriesTable component', () => {
-    const { getByTestId } = render(
-      <ApolloProvider client={mockClient}>
-        <Page />
-      </ApolloProvider>
+  it('renders the page with search and table', async () => {
+    render(
+      <MockedProvider mocks={mocks}>
+        <Home />
+      </MockedProvider>
     );
-    expect(getByTestId('repositories-table')).toBeInTheDocument();
+
+    expect(screen.getByText('Most Starred GitHub Repositories')).toBeInTheDocument();
+
+    const searchInput = screen.getByPlaceholderText(`Example search: ${DEFAULT_QUERY}`);
+    expect(searchInput).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByRole('table')).toBeInTheDocument();
+    });
   });
 });

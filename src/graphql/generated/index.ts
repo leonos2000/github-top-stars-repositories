@@ -35558,6 +35558,7 @@ export type WorkflowsParametersInput = {
 export type GetTopStarredRepositoriesQueryVariables = Exact<{
   first: Scalars['Int']['input'];
   after?: InputMaybe<Scalars['String']['input']>;
+  query: Scalars['String']['input'];
 }>;
 
 
@@ -35565,13 +35566,8 @@ export type GetTopStarredRepositoriesQuery = { __typename?: 'Query', search: { _
 
 
 export const GetTopStarredRepositoriesDocument = gql`
-    query GetTopStarredRepositories($first: Int!, $after: String) {
-  search(
-    type: REPOSITORY
-    query: "is:public stars:>10000 topic:react"
-    first: $first
-    after: $after
-  ) {
+    query GetTopStarredRepositories($first: Int!, $after: String, $query: String!) {
+  search(type: REPOSITORY, query: $query, first: $first, after: $after) {
     repositoryCount
     pageInfo {
       hasNextPage
@@ -35615,6 +35611,7 @@ export const GetTopStarredRepositoriesDocument = gql`
  *   variables: {
  *      first: // value for 'first'
  *      after: // value for 'after'
+ *      query: // value for 'query'
  *   },
  * });
  */

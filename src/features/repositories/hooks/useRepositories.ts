@@ -1,12 +1,14 @@
 import { useGetTopStarredRepositoriesQuery } from '@/graphql/generated';
 import { normalizeRepository } from '../utils/normalizeRepository';
 import { useMemo, useState } from 'react';
+import { DEFAULT_QUERY } from '@/constants';
 
 const ITEMS_PER_PAGE = 10;
 const DEFAULT_AFTER_VALUE = '0';
 
 export const useRepositories = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState(DEFAULT_QUERY);
   const afterValue =
     currentPage > 1 ? String((currentPage - 1) * ITEMS_PER_PAGE) : DEFAULT_AFTER_VALUE;
 
@@ -14,6 +16,7 @@ export const useRepositories = () => {
     variables: {
       first: ITEMS_PER_PAGE,
       after: Buffer.from(`cursor:${afterValue}`).toString('base64'),
+      query: searchQuery,
     },
     fetchPolicy: 'cache-and-network',
   });
@@ -26,6 +29,7 @@ export const useRepositories = () => {
     await fetchMore({
       variables: {
         after: data.search.pageInfo.endCursor,
+        query: searchQuery,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) {
@@ -52,7 +56,6 @@ export const useRepositories = () => {
 
   return {
     repositories,
-
     isLoading: loading,
     error,
     totalPages,
@@ -60,8 +63,8 @@ export const useRepositories = () => {
     currentPage,
     itemsPerPage: ITEMS_PER_PAGE,
     hasNextPage,
-
     loadMore,
     setCurrentPage,
+    setSearchQuery,
   };
 };

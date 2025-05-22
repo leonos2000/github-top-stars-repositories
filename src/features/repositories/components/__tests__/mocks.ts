@@ -1,5 +1,6 @@
 import { NormalizedRepository } from '../../types/repository';
 import { GetTopStarredRepositoriesDocument } from '@/graphql/generated';
+import { DEFAULT_QUERY } from '@/constants';
 
 const BASE64_CURSOR_0 = 'Y3Vyc29yOjA='; // cursor:0
 
@@ -49,6 +50,7 @@ export const mockRepository = {
 export const mockRepositories: NormalizedRepository[] = [mockRepository];
 
 export const mockGraphQLRepositories = {
+  __typename: 'Query',
   search: {
     __typename: 'SearchResultItemConnection',
     repositoryCount: 1,
@@ -75,6 +77,7 @@ export const mockGraphQLMocks = [
       variables: {
         first: 10,
         after: BASE64_CURSOR_0,
+        query: DEFAULT_QUERY,
       },
     },
     result: {
