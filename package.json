@@ -11,7 +11,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky install --quiet",
-    "docker:dev": "docker compose up",
+    "docker:prod": "docker compose up",
     "docker:build": "docker compose build",
     "docker:down": "docker compose down",
     "docker:clean": "docker compose down -v --remove-orphans",

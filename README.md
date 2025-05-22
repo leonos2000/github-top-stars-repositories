@@ -30,7 +30,6 @@ A Next.js application that displays and manages GitHub repositories with the mos
 
 - Node.js (Latest LTS version recommended)
 - pnpm 10.11.0 or later
-- Docker and Docker Compose (for containerized development)
 - GitHub Personal Access Token (for API access)
 
 ### Environment Variables
@@ -72,26 +71,15 @@ pnpm dev
 
 The application will be available at [http://localhost:3000](http://localhost:3000).
 
-### Docker Development
+### Docker
 
-The project includes Docker support for development and production environments:
+The project includes Docker support for production environment. To run the application in production mode:
 
 ```bash
-# Start development environment
-pnpm docker:dev
-
-# Build containers
-pnpm docker:build
-
-# Stop containers
-pnpm docker:down
-
-# View logs
-pnpm docker:logs
-
-# Clean up Docker resources
-pnpm docker:clean
+pnpm docker:prod
 ```
+
+This will build and start the application in a production-ready container.
 
 ## Development
 
@@ -128,7 +116,6 @@ This project uses several tools to maintain code quality:
 - **Husky**: Git hooks for pre-commit and pre-push checks
   - Hooks are managed in the `.husky/` directory
   - Automatically installed via `prepare` script
-  - No need to use deprecated `husky add` command
 
 ### Project Structure
 
@@ -144,7 +131,7 @@ src/
 
 ## Testing
 
-The project uses Jest and React Testing Library for testing:
+The project uses Jest and React Testing Library for testing. Tests are configured in `jest.config.ts` and can be run in several ways:
 
 ```bash
 # Run all tests
@@ -156,3 +143,10 @@ pnpm test:watch
 # Generate coverage report
 pnpm test:coverage
 ```
+
+Test files should be placed in `__tests__` directories and follow the naming pattern `*.test.ts/tsx`. The test configuration includes:
+
+- Jest DOM environment for browser-like testing
+- Coverage reporting for all source files
+- Module aliasing for clean imports
+- Setup files for test environment configuration
