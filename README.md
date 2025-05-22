@@ -1,62 +1,158 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GitHub Top Stars Repositories
+
+A Next.js application that displays and manages GitHub repositories with the most stars. Built with modern web technologies and best practices.
+
+## Features
+
+- View top-starred GitHub repositories
+- Modern UI built with Ant Design
+- GraphQL integration with Apollo Client
+- TypeScript for type safety
+- Comprehensive testing setup with Jest
+- Docker support for development and production
+- Code quality tools (ESLint, Prettier, Husky)
+
+## Tech Stack
+
+- **Framework**: Next.js 15.3.2
+- **Language**: TypeScript
+- **UI Library**: Ant Design
+- **State Management**: Apollo Client
+- **API**: GraphQL
+- **Testing**: Jest, React Testing Library
+- **Package Manager**: pnpm
+- **Code Quality**: ESLint, Prettier, Husky
+- **Containerization**: Docker
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (Latest LTS version recommended)
+- pnpm 10.11.0 or later
+- Docker and Docker Compose (for containerized development)
+- GitHub Personal Access Token (for API access)
+
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+NEXT_PUBLIC_GITHUB_TOKEN=your_github_personal_access_token
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To create a GitHub Personal Access Token:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Go to GitHub Settings > Developer Settings > Personal Access Tokens
+2. Generate a new token with the following permissions:
+   - `repo` (Full control of private repositories)
+   - `read:user` (Read user profile data)
+   - `read:org` (Read organization data)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Installation
 
-## Learn More
+1. Clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+git clone [repository-url]
+cd github-top-stars-repositories
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Code Quality: Prettier, ESLint, and Husky
-
-This project uses Prettier, ESLint, and Husky for code quality and consistency.
-
-- **Prettier**: Run `pnpm format` to auto-format code, or `pnpm format:check` to check formatting.
-- **ESLint**: Run `pnpm lint` to check for lint errors.
-- **Husky**: Git hooks are managed with Husky. Hooks are created manually in the `.husky/` directory (not with deprecated `husky add`).
-
-### Setting up Husky (non-deprecated way)
-
-After cloning or installing dependencies, run:
-
-```sh
+```bash
 pnpm install
 ```
 
-This will automatically run `husky install` via the `prepare` script.
+3. Start the development server:
 
-To add or update hooks, manually edit files in `.husky/` (e.g., `.husky/pre-commit`, `.husky/pre-push`). Make sure they are executable:
-
-```sh
-chmod +x .husky/pre-commit .husky/pre-push
+```bash
+pnpm dev
 ```
 
-**Do not use `husky add` or other deprecated commands.**
+The application will be available at [http://localhost:3000](http://localhost:3000).
+
+### Docker Development
+
+The project includes Docker support for development and production environments:
+
+```bash
+# Start development environment
+pnpm docker:dev
+
+# Build containers
+pnpm docker:build
+
+# Stop containers
+pnpm docker:down
+
+# View logs
+pnpm docker:logs
+
+# Clean up Docker resources
+pnpm docker:clean
+```
+
+## Development
+
+### Available Scripts
+
+- `pnpm dev` - Start development server with Turbopack
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+- `pnpm format` - Format code with Prettier
+- `pnpm test` - Run tests
+- `pnpm test:watch` - Run tests in watch mode
+- `pnpm test:coverage` - Run tests with coverage report
+- `pnpm codegen` - Generate GraphQL types
+- `pnpm codegen:watch` - Watch and generate GraphQL types
+
+### Code Quality
+
+This project uses several tools to maintain code quality:
+
+- **Prettier**: Code formatting
+
+  ```bash
+  pnpm format        # Format code
+  pnpm format:check  # Check formatting
+  ```
+
+- **ESLint**: Code linting
+
+  ```bash
+  pnpm lint
+  ```
+
+- **Husky**: Git hooks for pre-commit and pre-push checks
+  - Hooks are managed in the `.husky/` directory
+  - Automatically installed via `prepare` script
+  - No need to use deprecated `husky add` command
+
+### Project Structure
+
+```
+src/
+├── app/          # Next.js app directory
+├── components/   # Reusable UI components
+├── features/     # Feature-specific components and logic
+├── graphql/      # GraphQL queries and mutations
+├── lib/          # Utility functions and shared logic
+└── constants.ts  # Application constants
+```
+
+## Testing
+
+The project uses Jest and React Testing Library for testing:
+
+```bash
+# Run all tests
+pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+
+# Generate coverage report
+pnpm test:coverage
+```
