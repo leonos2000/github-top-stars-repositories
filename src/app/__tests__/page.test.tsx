@@ -1,30 +1,13 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import Home from '../page';
 import { MockedProvider } from '@apollo/client/testing';
-import { GetTopStarredRepositoriesDocument } from '@/graphql/generated';
-import { mockGraphQLRepositories } from '@/features/repositories/components/__tests__/mocks';
 import { DEFAULT_QUERY } from '@/constants';
+import { mockApolloClient } from '@/utils/tests/mocks/repositories';
 
 describe('Home', () => {
-  const mocks = [
-    {
-      request: {
-        query: GetTopStarredRepositoriesDocument,
-        variables: {
-          first: 10,
-          after: 'Y3Vyc29yOjA=',
-          query: DEFAULT_QUERY,
-        },
-      },
-      result: {
-        data: mockGraphQLRepositories,
-      },
-    },
-  ];
-
   it('renders the page with search and table', async () => {
     render(
-      <MockedProvider mocks={mocks}>
+      <MockedProvider mocks={mockApolloClient}>
         <Home />
       </MockedProvider>
     );

@@ -1,8 +1,8 @@
-import { NormalizedRepository } from '../../types/repository';
-import { GetTopStarredRepositoriesDocument } from '@/graphql/generated';
 import { DEFAULT_QUERY } from '@/constants';
+import { NormalizedRepository } from '@/features/repositories/types/repository';
+import { GetTopStarredRepositoriesDocument } from '@/graphql/generated';
 
-const BASE64_CURSOR_0 = 'Y3Vyc29yOjA='; // cursor:0
+export const BASE64_CURSOR_0 = 'Y3Vyc29yOjA='; // cursor:0
 
 export const mockRepository = {
   __typename: 'Repository',
@@ -96,6 +96,22 @@ export const mockErrorMocks = [
       },
     },
     error: new Error('An error occurred'),
+  },
+];
+
+export const mockApolloClient = [
+  {
+    request: {
+      query: GetTopStarredRepositoriesDocument,
+      variables: {
+        first: 10,
+        after: BASE64_CURSOR_0,
+        query: DEFAULT_QUERY,
+      },
+    },
+    result: {
+      data: mockGraphQLRepositories,
+    },
   },
 ];
 

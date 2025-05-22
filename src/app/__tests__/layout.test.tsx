@@ -7,11 +7,6 @@ jest.mock('../../components/Providers', () => ({
   ),
 }));
 
-jest.mock('next/head', () => ({
-  __esModule: true,
-  default: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
-
 describe('Layout', () => {
   it('renders children within Providers', () => {
     const { container } = render(

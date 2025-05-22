@@ -19,6 +19,7 @@ const config: Config = {
     '!**/node_modules/**',
     '!**/.next/**',
     '!src/graphql/**/*.ts',
+    '!src/utils/tests/**/*.{ts,tsx}',
   ],
 };
 

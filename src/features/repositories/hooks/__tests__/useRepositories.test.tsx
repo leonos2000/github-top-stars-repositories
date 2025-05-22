@@ -2,12 +2,13 @@ import { renderHook, act } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import { useRepositories } from '../useRepositories';
 import { GetTopStarredRepositoriesDocument } from '@/graphql/generated';
-import {
-  mockGraphQLRepositories,
-  mockGraphQLMocks,
-  mockRepository,
-} from '../../components/__tests__/mocks';
 import { DEFAULT_QUERY } from '@/constants';
+import {
+  BASE64_CURSOR_0,
+  mockGraphQLMocks,
+  mockGraphQLRepositories,
+  mockRepository,
+} from '@/utils/tests/mocks/repositories';
 
 describe('useRepositories', () => {
   const wrapper = ({ children }: { children: React.ReactNode }) => (
@@ -33,7 +34,7 @@ describe('useRepositories', () => {
           query: GetTopStarredRepositoriesDocument,
           variables: {
             first: 10,
-            after: 'Y3Vyc29yOjA=',
+            after: BASE64_CURSOR_0,
             query: DEFAULT_QUERY,
           },
         },
@@ -47,7 +48,6 @@ describe('useRepositories', () => {
     );
     const { result } = renderHook(() => useRepositories(), { wrapper: fetchWrapper });
 
-    // Wait for the query to resolve
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
@@ -88,7 +88,7 @@ describe('useRepositories', () => {
           query: GetTopStarredRepositoriesDocument,
           variables: {
             first: 10,
-            after: 'Y3Vyc29yOjA=',
+            after: BASE64_CURSOR_0,
             query: DEFAULT_QUERY,
           },
         },
@@ -140,7 +140,7 @@ describe('useRepositories', () => {
           query: GetTopStarredRepositoriesDocument,
           variables: {
             first: 10,
-            after: 'Y3Vyc29yOjA=',
+            after: BASE64_CURSOR_0,
             query: DEFAULT_QUERY,
           },
         },
@@ -190,7 +190,7 @@ describe('useRepositories', () => {
           query: GetTopStarredRepositoriesDocument,
           variables: {
             first: 10,
-            after: 'Y3Vyc29yOjA=',
+            after: BASE64_CURSOR_0,
             query: DEFAULT_QUERY,
           },
         },
@@ -238,7 +238,7 @@ describe('useRepositories', () => {
           query: GetTopStarredRepositoriesDocument,
           variables: {
             first: 10,
-            after: 'Y3Vyc29yOjA=',
+            after: BASE64_CURSOR_0,
             query: DEFAULT_QUERY,
           },
         },
@@ -251,7 +251,7 @@ describe('useRepositories', () => {
           query: GetTopStarredRepositoriesDocument,
           variables: {
             first: 10,
-            after: 'Y3Vyc29yOjA=',
+            after: BASE64_CURSOR_0,
             query: customQuery,
           },
         },

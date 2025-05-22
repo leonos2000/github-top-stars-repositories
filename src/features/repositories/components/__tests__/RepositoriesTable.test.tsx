@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { RepositoriesTable } from '../RepositoriesTable';
-import { mockRepositories, mockOnPageChange } from './mocks';
+import { mockRepositories, mockOnPageChange } from '@/utils/tests/mocks/repositories';
 
 describe('RepositoriesTable', () => {
   beforeEach(() => {
